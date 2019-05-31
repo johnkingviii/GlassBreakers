@@ -5,9 +5,13 @@ using UnityEngine;
 public class SpawnRocks : MonoBehaviour {
 
     public Transform rockSpawn;
-    public GameObject[] rocks;
 
-    int spawnSpot;
+    public GameObject SpawnableArea;
+
+    public GameObject MeteorPrefab;
+
+    [SerializeField]
+    float SpawnHeight;
 
     void Start()
     {
@@ -18,30 +22,30 @@ public class SpawnRocks : MonoBehaviour {
     {
     }
 
+
+
     void SpawnRock()
     {
         //change up spawn position of rocks a bit
-        spawnSpot = Random.Range(-1, 8);
-        //pick a random rock prefab from our array of prefabs, copy it to the new theRock object
-        GameObject theRock = rocks[Random.Range(0, rocks.Length)];
+
+        Vector3 min = GetComponent<MeshFilter>().mesh.bounds.min;
+        Vector3 max = GetComponent<MeshFilter>().mesh.bounds.max;
+
+        Vector3 spawnLocation = new Vector3(Random.Range(min.x, max.x), SpawnableArea.transform.position.y + SpawnHeight, Random.Range(min.z, max.z));
 
         //spawn theRock
-        Instantiate(theRock, new Vector3(transform.position.x + spawnSpot, transform.position.y, transform.position.z), Quaternion.identity);
-        //give it a random direction and velocity
-        theRock.GetComponent<Rigidbody2D>().velocity = ((Vector2)Random.onUnitSphere).normalized * Random.Range(5, 10);
-
-        //destroy theRock after 2 seconds
-        Destroy(theRock, 2f);
+        GameObject meteor = Instantiate(MeteorPrefab, spawnLocation, Quaternion.identity);
+        meteor.name = "meteor";
+        meteor.transform.SetParent(this.transform);
 
         //wait for a random amount of seconds
-        Wait();
-
-        //spawn another rock
-        SpawnRock();
+        StartCoroutine("Wait");
+        
     }
 
-    public static IEnumerator Wait()
+    IEnumerator Wait()
     {
-        yield return new WaitForSeconds(Random.Range(.2f, .5f));
+        yield return new WaitForSeconds(Random.Range(1, 5));
+        SpawnRock();
     }
 }
