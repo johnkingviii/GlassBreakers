@@ -13,11 +13,15 @@ public class GameController : MonoBehaviour
     public Leaderboard leaderboard;
     public TextMeshProUGUI GameOverText;
     public TextMeshProUGUI RestartButtonText;
+    public GameObject mainMenuBtn;
 
     public GameObject ListObject;
     public GameObject LeaderBoardObject;
 
     public GameObject ScoreEntryPrefab;
+
+    public bool GameOver;
+
 
     // Start is called before the first frame update
     void Start()
@@ -33,9 +37,11 @@ public class GameController : MonoBehaviour
         GameOverText.gameObject.SetActive(true);
         LeaderBoardObject.SetActive(true);
         RestartButtonText.transform.parent.gameObject.SetActive(true);
+        mainMenuBtn.SetActive(true);
         leaderboard.Save("test", ScoreCounter.instance.CurrentScore);
         leaderboard.OrderScores();
         DisplayScore();
+        GameOver = true;
     }
 
     public void DisplayScore()
@@ -53,6 +59,12 @@ public class GameController : MonoBehaviour
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
     }
+
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
 
 
     // Update is called once per frame

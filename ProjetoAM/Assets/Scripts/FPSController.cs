@@ -67,7 +67,8 @@ public class FPSController : MonoBehaviour {
         transform.Rotate(0, rotX, 0);
 
         //rodar a camera no eixo dos yy
-        eyes.transform.localRotation = Quaternion.Euler(rotY, 0, 0);
+        eyes.transform.localRotation = Quaternion.Euler(0, 0, rotY);
+     
 
         //orientar o player na direção certa
         movement = transform.rotation * movement;

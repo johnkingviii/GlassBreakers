@@ -36,7 +36,7 @@ public class ScoreCounter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!busy)
+        if (!GameController.instance.GameOver && !busy)
         {
             StartCoroutine("UpdateScore");
         }
