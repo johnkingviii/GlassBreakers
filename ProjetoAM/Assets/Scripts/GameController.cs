@@ -20,6 +20,9 @@ public class GameController : MonoBehaviour
 
     public GameObject ScoreEntryPrefab;
 
+    public TMP_InputField NameInput;
+    public GameObject submitBtn;
+
     public bool GameOver;
 
 
@@ -38,15 +41,32 @@ public class GameController : MonoBehaviour
         LeaderBoardObject.SetActive(true);
         RestartButtonText.transform.parent.gameObject.SetActive(true);
         mainMenuBtn.SetActive(true);
-        leaderboard.Save("test", ScoreCounter.instance.CurrentScore);
-        leaderboard.OrderScores();
+        NameInput.gameObject.SetActive(true);
+        submitBtn.SetActive(true);
         DisplayScore();
         GameOver = true;
     }
 
+    public void SaveToLeaderBoard()
+    {
+        string name = NameInput.text;
+        if (name.Length <= 0)
+            return;
+
+        leaderboard.Save(name, ScoreCounter.instance.CurrentScore);
+        leaderboard.OrderScores();
+        DisplayScore();
+        NameInput.gameObject.SetActive(false);
+        submitBtn.SetActive(false);
+    }
+
     public void DisplayScore()
     {
-        foreach(LeaderboardEntry entry in leaderboard.leaderboard.Scores)
+        foreach (Transform child in ListObject.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+        foreach (LeaderboardEntry entry in leaderboard.leaderboard.Scores)
         {
             GameObject entryGO = GameObject.Instantiate(ScoreEntryPrefab);
             entryGO.GetComponentInChildren<Text>().text = entry.Name + "\t" + entry.Score;
