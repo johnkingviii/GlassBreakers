@@ -7,6 +7,7 @@ public class DisplayChanges : MonoBehaviour
 
     public GameObject PlayerObject;
     public static DisplayChanges instance;
+    public GameObject ShotObject;
 
     SkinnedMeshRenderer BodyRenderer;
     SkinnedMeshRenderer ConeRenderer;
@@ -22,6 +23,11 @@ public class DisplayChanges : MonoBehaviour
         BodyRenderer = renderers[0];
         ConeRenderer = renderers[1];
         instance = this;
+    }
+
+    public void DisplayShoot(Mesh mesh)
+    {
+        ShotObject.GetComponent<MeshFilter>().mesh = mesh;
     }
 
     public void DisplayVisualChanges()

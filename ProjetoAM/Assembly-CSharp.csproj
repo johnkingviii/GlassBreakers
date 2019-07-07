@@ -72,6 +72,8 @@
     <Compile Include="Assets\DestructibleWallGenerator\Example\Scripts\ThrowObject.cs" />
     <Compile Include="Assets\Lava_Flowing_Shader\Scripts\ScrollingUVs_Layers.cs" />
     <Compile Include="Assets\Player.cs" />
+    <Compile Include="Assets\RPG Food &amp; Drinks Pack\Assets\Scripts\Consumer.cs" />
+    <Compile Include="Assets\RPG Food &amp; Drinks Pack\Assets\Scripts\Rotator.cs" />
     <Compile Include="Assets\Scripts\CameraController OLD.cs" />
     <Compile Include="Assets\Scripts\Customization\CharacterAppearance.cs" />
     <Compile Include="Assets\Scripts\Customization\CustomizePart.cs" />
