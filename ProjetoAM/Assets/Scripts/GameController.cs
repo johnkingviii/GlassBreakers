@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour
 
     public GameObject ListObject;
     public GameObject LeaderBoardObject;
+    public GameObject CrossHair;
 
     public GameObject ScoreEntryPrefab;
 
@@ -43,6 +44,7 @@ public class GameController : MonoBehaviour
         mainMenuBtn.SetActive(true);
         NameInput.gameObject.SetActive(true);
         submitBtn.SetActive(true);
+        CrossHair.SetActive(false);
         DisplayScore();
         GameOver = true;
     }
