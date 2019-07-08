@@ -53,7 +53,7 @@ public class FPSController : MonoBehaviour {
             nextFire = Time.time + fireRate;
             var bullet = Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
 
-            if(Random.Range(0, 1) == 1)
+            if(Random.Range(0, 2) == 1)
                 source.PlayOneShot(shoot1);
             else
                 source.PlayOneShot(shoot2);
